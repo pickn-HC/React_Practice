@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 function UpdateContent({item, onSubmit}) {
   const[title, setTitle] = useState(item.title);
   const[desc, setDesc] = useState(item.desc);
-
+  
   return (
     <article>
       <h2>Update</h2>
@@ -19,20 +19,20 @@ function UpdateContent({item, onSubmit}) {
           <p><input 
                 type="text" 
                 name="title" 
-                placeholder="title" 
-                value={item.title}
-                onChange={function(e) {
-                  console.log(e.target.value);
-                  // setTitle(e.target.value);
+                placeholder="title"
+                value={title}
+                onChange={(e) => {
+                  setTitle(e.target.value);
                 }}
+                
               ></input></p>
           <p><textarea
                 name="desc" 
                 placeholder="description"
                 value={item.desc}
                 onChange={function(e) {
-                  console.log(e.target.value);
-                  // setDesc(e.target.value);
+                  item.desc = e.target.value;
+                  setDesc(e.target.value);
                 }}
               ></textarea></p>
           <p><input type="submit"></input></p>

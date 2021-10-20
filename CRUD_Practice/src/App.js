@@ -98,7 +98,12 @@ function App() {
       alert("deleted!");
     }
   }
-  
+
+  function test() {
+    const x = 10;
+    console.log(x);
+  }
+
   return (
     <div className="App">
       <_Subject title={items_subject[0].title} sub={items_subject[0].sub} />

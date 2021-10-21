@@ -1,37 +1,51 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-
-function Nav() {
+function Navigation(event) {
+  const arr = [];
   const [data, setData] = useState([]);
-
-  useEffect(async () => {
-      const response = await axios.get("https://jsonplaceholder.typicode.com/users");
-      setData(response.data);
-
-  }, []);
-
-
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/users").then((res) => {
+      for (let i = 0; i < res.data.length; i += 1) {
+        const tmp = res.data[i];
+        arr.push(
+          <li key={tmp.id} email={tmp.email}>
+            <a
+              href={tmp.id}
+              onClick={(e) => {
+                e.preventDefault();
+                event.onClick(tmp.name, tmp.email);
+              }}
+            >
+              {tmp.name}
+            </a>
+          </li>
+        );
+      }
+      setData(arr);
+    });
+  });
   return (
     <nav>
-      <ul>
-        {data.map((item) => {
-          <li>{data[0].id}</li>
-        })}
-      </ul>
+      <ul>{data}</ul>
     </nav>
   );
 }
 
-
 function App() {
+  const [item, setItem] = useState([]);
+
   return (
     <div className="App">
       <h1>WEB</h1>
-      <Nav></Nav>
+      <Navigation
+        onClick={(name, email) => {
+          setItem([name, email]);
+        }}
+      />
       <article>
-        <h2>Welcome</h2>
-        Hello, React &amp; Axios
+        <h2>{item[0]}</h2>
+        {item[1]}
       </article>
     </div>
   );

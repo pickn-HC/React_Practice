@@ -1,23 +1,32 @@
 import React, { useState } from "react";
-import _TOC from "./components/TOC";
-import _Subject from "./components/Subject";
-import _Control from "./components/Control";
-import _ReadContent from "./components/ReadContent";
-import _CreateContent from "./components/CreateContent";
-import _UpdateContent from "./components/UpdateContent";
-import "./App.css";
+import _Subject from "./component/Subject";
+import _ReadContent from "./component/ReadContent";
+import _TOC from "./component/TOC";
+import _Control from "./component/Control";
+import _CreateContent from "./component/CreateContent";
+import _UpdateContent from "./component/UpdateContent";
 
-let _nbr = 0;
+let _nbr: number = 0;
 let _title,
-  _desc,
-  _article = null;
-let last_content = 3;
+  _desc: string = "";
+let _article: any = null;
+let last_content: number = 3;
 
 // Subject에 대한 배열
-const Subject = [{ title: "WEB", sub: "World Wide Web!" }];
+interface SubjectType {
+  title: string;
+  sub: string;
+}
+
+const Subject: SubjectType[] = [{ title: "WEB", sub: "World Wide Web!" }];
 
 // ReadContent에 대한 배열
-const ReadContent = [
+interface ReadContentType {
+  title: string;
+  desc: string;
+}
+
+const ReadContent: ReadContentType[] = [
   { title: "Welcome", desc: "Hello, React!!" },
   { title: "HTML", desc: "HTML is HyperText Markup Language" },
   { title: "CSS", desc: "CSS is for design" },
@@ -25,36 +34,46 @@ const ReadContent = [
 ];
 
 // TOC에 대한 배열
-const TOC = [
+interface TOCType {
+  id: number;
+  title: string;
+  desc: string;
+}
+
+const TOC: TOCType[] = [
   { id: 1, title: "HTML", desc: "HTML is HyperText Markup Language" },
   { id: 2, title: "CSS", desc: "CSS is for design" },
   { id: 3, title: "JavaScript", desc: "Language for Webpage Event" },
 ];
 
+interface ModeType {
+  mode: string;
+  modeNbr: number;
+}
+
+const Mode: ModeType = { mode: "Read", modeNbr: -1 };
+
 function App() {
-  // Subject에 대한 state
-  // const [titleSub, settitleSub] = useState("WEB");
-  // const [sub, setSub] = useState("World Wide Web!");
+  const [items_subject, setSubject] = useState<SubjectType[]>(Subject);
+  const [items_readContent, setReadContent] =
+    useState<ReadContentType[]>(ReadContent);
+  const [items_TOC, setTOC] = useState<TOCType[]>(TOC);
+  const [mode, setMode] = useState<ModeType>(Mode);
 
-  // Subject/ReadContent/TOC/mode 에 대한 값 설정
-  const [items_subject, setSubject] = useState(Subject);
-  const [items_readContent, setReadContent] = useState(ReadContent);
-  const [items_TOC, setTOC] = useState(TOC);
-  const [mode, setMode] = useState(["Read", -1]);
+  let modeNow = mode.mode;
+  let modeNbrNow = mode.modeNbr;
 
-  console.log(items_TOC);
-  console.log(items_readContent);
-
-  if (mode[0] === "Read") {
-    _nbr = mode[1] + 1; // TOC와 ReadContent의 같은 값의 원소의 위치가 1씩 차이남
+  if (modeNow === "Read") {
+    _nbr = modeNbrNow + 1; // TOC와 ReadContent의 같은 값의 원소의 위치가 1씩 차이남
     _title = items_readContent[_nbr].title;
     _desc = items_readContent[_nbr].desc;
     _article = <_ReadContent title={_title} desc={_desc} />;
-  } else if (mode === "Create") {
+    console.log(_article);
+  } else if (modeNow === "Create") {
     _article = (
       // eslint-disable-next-line react/jsx-pascal-case
       <_CreateContent
-        onSubmit={function (newTitle, newDesc) {
+        onSubmit={function (newTitle: string, newDesc: string) {
           last_content = last_content + 1;
           // const tmp = {id: last_content, title: _title, desc: _desc};
           // TOC = [...TOC, tmp];
@@ -67,13 +86,13 @@ function App() {
         }}
       />
     );
-  } else if (mode === "Update") {
+  } else if (modeNow === "Update") {
     let content = items_TOC[_nbr - 1];
     _article = (
       // eslint-disable-next-line react/jsx-pascal-case
       <_UpdateContent
         item={content}
-        onSubmit={function (_id, _title, _desc) {
+        onSubmit={function (_id: number, _title: string, _desc: string) {
           let contentTOC = Array.from(items_TOC);
           let contentReadContent = Array.from(items_readContent);
 
@@ -89,7 +108,7 @@ function App() {
         }}
       />
     );
-  } else if (mode === "Delete") {
+  } else if (modeNow === "Delete") {
     let content = items_TOC[_nbr - 1];
     let content_nbr = content.id - 1;
     if (window.confirm("Really?")) {
@@ -99,7 +118,7 @@ function App() {
       contentTOC.splice(content_nbr, 1);
       contentReadContent.splice(content_nbr + 1, 1);
 
-      setMode("Welcome");
+      setMode({ mode: "Read", modeNbr: -1 });
       setTOC([...contentTOC]);
       setReadContent([...contentReadContent]);
 
@@ -112,12 +131,12 @@ function App() {
       <_Subject title={items_subject[0].title} sub={items_subject[0].sub} />
       <_TOC
         items={items_TOC}
-        onChangePage={function (mode) {
+        onChangePage={function (mode: any) {
           setMode(mode);
         }}
       />
       <_Control
-        onChangeMode={function (mode) {
+        onChangeMode={function (mode: any) {
           setMode(mode);
         }}
       />

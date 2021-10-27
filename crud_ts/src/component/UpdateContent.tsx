@@ -1,3 +1,4 @@
+import { Button, TextField } from "@material-ui/core";
 import React, { useState } from "react";
 
 function UpdateContent(obj: { item: any; onSubmit: any }) {
@@ -7,46 +8,36 @@ function UpdateContent(obj: { item: any; onSubmit: any }) {
   return (
     <article>
       <h2>Update</h2>
-      <form
-        action="/create-process"
-        method="post"
-        onSubmit={(e: any) => {
+      <TextField type="hidden" name="id" value={obj.item.id} />
+      <TextField
+        type="text"
+        name="title"
+        placeholder="title"
+        value={title}
+        onChange={(e: any) => {
           e.preventDefault();
-          obj.onSubmit(
-            e.target.id.value,
-            e.target.title.value,
-            e.target.desc.value
-          );
+          setTitle(e.target.value);
+        }}
+      />
+      <TextField
+        type="text"
+        name="desc"
+        placeholder="description"
+        value={desc}
+        onChange={(e: any) => {
+          e.preventDefault();
+          setDesc(e.target.value);
+        }}
+      />
+      <Button
+        onClick={(e: any) => {
+          e.preventDefault();
+          obj.onSubmit(obj.item.id, title, desc);
           alert("Submit!");
         }}
       >
-        <input type="hidden" name="id" value={obj.item.id} />
-        <p>
-          <input
-            type="text"
-            name="title"
-            placeholder="title"
-            value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-          ></input>
-        </p>
-        <p>
-          <textarea
-            name="desc"
-            placeholder="description"
-            value={obj.item.desc}
-            onChange={function (e) {
-              obj.item.desc = e.target.value;
-              setDesc(e.target.value);
-            }}
-          ></textarea>
-        </p>
-        <p>
-          <input type="submit"></input>
-        </p>
-      </form>
+        제출
+      </Button>
     </article>
   );
 }

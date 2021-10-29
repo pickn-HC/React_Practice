@@ -1,0 +1,13 @@
+/* Control CSS */
+.Controlcontainer {
+    display: block;
+}
+
+/* CreateContent CSS */
+.CreateContainer {
+    display: block;
+}
+
+.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButtonBase-root.item.css-sghohy-MuiButtonBase-root-MuiButton-root {
+    font-size: 30px;
+}

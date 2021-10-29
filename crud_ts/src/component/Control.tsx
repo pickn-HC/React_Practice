@@ -1,14 +1,14 @@
 import React from "react";
+import "../App.css";
 // MUI import
-import { Button } from "@material-ui/core";
-import Stack from "@mui/material/Stack";
+import { Button, Stack } from "@mui/material";
 
 function Control(props: { onChangeMode: any }) {
   return (
-    <Stack direction="row" spacing={2}>
+    <div className="container">
       <Button
         variant="contained"
-        href="/create"
+        className="item"
         onClick={function (e: any) {
           e.preventDefault();
           props.onChangeMode({ mode: "Create" });
@@ -18,7 +18,7 @@ function Control(props: { onChangeMode: any }) {
       </Button>
       <Button
         variant="contained"
-        href="/update"
+        className="item"
         onClick={function (e: any) {
           e.preventDefault();
           props.onChangeMode({ mode: "Update" });
@@ -28,6 +28,7 @@ function Control(props: { onChangeMode: any }) {
       </Button>
       <Button
         variant="contained"
+        className="item"
         onClick={function (e: any) {
           e.preventDefault();
           props.onChangeMode({ mode: "Delete" });
@@ -37,8 +38,11 @@ function Control(props: { onChangeMode: any }) {
       >
         Delete
       </Button>
-    </Stack>
+    </div>
   );
 }
+const styles = {
+  width: "300px",
+};
 
 export default Control;

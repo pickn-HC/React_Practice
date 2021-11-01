@@ -1,9 +1,10 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import {NativeBaseProvider, View, Text} from 'native-base';
-import CategoryList from './src/components/CategoryList';
-import Content from './src/components/Content';
-import EnrollmentButton from './src/components/EnrollmentButton';
+import {NativeBaseProvider, View, Text, ScrollView} from 'native-base';
+import CategoryList from './src/Components/CategoryList';
+import Content from './src/Components/Content';
+import EnrollmentButton from './src/Components/EnrollmentButton';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const WhosQuestion = ['전체보기', '내 질문 보기'];
 const Category = [
@@ -18,20 +19,18 @@ const Category = [
 const App = () => {
   return (
     <NativeBaseProvider>
-      <View>
+      <SafeAreaView style={{height: '100%', position: 'relative'}}>
         <View style={styles.tap1}>
           <CategoryList title={WhosQuestion} size={20} />
         </View>
         <View style={styles.tap2}>
           <CategoryList title={Category} size={15} />
         </View>
-        <View style={styles.content}>
-          <Content />
-        </View>
+        <Content />
         <View style={styles.button}>
           <EnrollmentButton />
         </View>
-      </View>
+      </SafeAreaView>
     </NativeBaseProvider>
   );
 };
@@ -39,19 +38,25 @@ const App = () => {
 const styles = StyleSheet.create({
   tap1: {
     justifyContent: 'center',
-    left: 10,
-    height: '15%',
+    left: 0,
+    height: 70 /* dp */,
   },
   tap2: {
     left: 10,
     right: 10,
-    height: '10%',
+    height: 60,
     flexWrap: 'wrap',
   },
   content: {
-    height: '69%',
+    height: '100%',
   },
-  button: {},
+  button: {
+    position: 'absolute',
+    bottom: 0,
+    width: '95%',
+    height: 50,
+    alignSelf: 'center',
+  },
 });
 
 export default App;

@@ -1,6 +1,8 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
+import {NativeBaseProvider, View, Text} from 'native-base';
 import CategoryList from './src/components/CategoryList';
+import Content from './src/components/Content';
 import EnrollmentButton from './src/components/EnrollmentButton';
 
 const WhosQuestion = ['전체보기', '내 질문 보기'];
@@ -12,22 +14,25 @@ const Category = [
   '병력 문의',
   '기타',
 ];
+
 const App = () => {
   return (
-    <View>
-      <View style={styles.tap1}>
-        <CategoryList title={WhosQuestion} size={20} />
-      </View>
-      <View style={styles.tap2}>
-        <CategoryList title={Category} size={15} />
-      </View>
-      <View style={styles.content}>
-        <Text>Content</Text>
-      </View>
+    <NativeBaseProvider>
       <View>
-        <EnrollmentButton />
+        <View style={styles.tap1}>
+          <CategoryList title={WhosQuestion} size={20} />
+        </View>
+        <View style={styles.tap2}>
+          <CategoryList title={Category} size={15} />
+        </View>
+        <View style={styles.content}>
+          <Content />
+        </View>
+        <View style={styles.button}>
+          <EnrollmentButton />
+        </View>
       </View>
-    </View>
+    </NativeBaseProvider>
   );
 };
 
@@ -46,6 +51,7 @@ const styles = StyleSheet.create({
   content: {
     height: '69%',
   },
+  button: {},
 });
 
 export default App;

@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import {TouchableOpacity, Text, View, StyleSheet} from 'react-native';
 
-export let categoryNbr = 0;
-
 function Texting(Props: {title: string[]; size: number}) {
   const [selected, setSelected] = useState(0);
 
@@ -19,7 +17,6 @@ function Texting(Props: {title: string[]; size: number}) {
         <TouchableOpacity
           onPress={() => {
             setSelected(i);
-            categoryNbr = i;
           }}
           style={styles.button}>
           <Text

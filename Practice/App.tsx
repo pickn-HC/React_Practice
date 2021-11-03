@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {NativeBaseProvider, View, ScrollView} from 'native-base';
-import CategoryList, {categoryNbr} from './src/Components/CategoryList';
+import CategoryList from './src/Components/CategoryList';
 import Content from './src/Components/Content';
 import EnrollmentButton from './src/Components/EnrollmentButton';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -16,9 +16,17 @@ const Category: Array<string> = [
   '병력 문의',
   '기타',
 ];
-// const User: number = 1;
 
 const App = () => {
+  // function test(title: string) {
+  //   ContentItem.map(item => {
+  //     if (item.title === title) {
+  //       item.questionAnswer = !item.questionAnswer;
+  //     }
+  //   });
+  //   setContentItems(ContentItem);
+  // }
+
   return (
     <NativeBaseProvider>
       <SafeAreaView style={{height: '100%', position: 'relative'}}>

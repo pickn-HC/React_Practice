@@ -1,18 +1,21 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
-import {Button, Text, View, Image} from 'native-base';
+import {StyleSheet, Image} from 'react-native';
+import {Button, Text, View} from 'native-base';
 
-const iconTest1 = require('../Assets/Images/question.png');
-const iconTest2 = require('../Assets/Images/question_fill.png');
+const allIcon = require('../Assets/Images/all.png');
+const questionIcon = require('../Assets/Images/question.png');
+const answeredIcon = require('../Assets/Images/question_fill.png');
 
 interface IProps {
   items: IContentItemEle[];
 }
 
 interface IContentItemEle {
-  title: string;
-  questionAnswer: boolean;
-  answerNumber: number;
+  title: string; // 제목
+  questionAnswer: boolean; // 답변여부
+  answerNumber: number; // 댓글 수
+  whoseQuestion: number; // 질문자 id 번호
+  categoryNumber: number; // 질문 카테고리 번호
 }
 
 function ChooseContent(items: IContentItemEle[], answerCheck: number) {
@@ -22,7 +25,6 @@ function ChooseContent(items: IContentItemEle[], answerCheck: number) {
     chooseItem = items;
   } else {
     const answerCheckBool: boolean = answerCheck === 1 ? true : false;
-    const iconName: any = answerCheck === 1 ? iconTest1 : iconTest2;
 
     for (let i = 0; i < items.length; i += 1) {
       if (items[i].questionAnswer === answerCheckBool) {
@@ -33,30 +35,35 @@ function ChooseContent(items: IContentItemEle[], answerCheck: number) {
   return chooseItem;
 }
 
+function useForceUpdate() {
+  const [value, setValue] = useState(0); // integer state
+  return () =>
+    setValue((): number => {
+      return value + 1;
+    }); // update the state to force render
+}
+
 function Content({items}: IProps) {
+  const forceUpdate = useForceUpdate();
   const [answerCheck, setAnswerCheck] = useState(0);
   let chooseItem: Array<any> = [];
-  const itemTmp: Array<any> = [];
-
   chooseItem = ChooseContent(items, answerCheck);
-  // console.log(chooseItem, iconName);
-  // for (let i = 0; i < chooseItem.length; i += 1) {
-  //   itemTmp.push(
-  //     <Button variant="outline" colorScheme="gray">
-  //       <Image source={iconName} alt={'image select'} />
-  //       <Text>{chooseItem[i].title}</Text>
-  //     </Button>,
-  //   );
-  // }
 
   function Test(item: IContentItemEle) {
     return (
-      <Button variant="outline" colorScheme="gray" key={item.title}>
-        <Image
-          source={item.questionAnswer ? iconTest1 : iconTest2}
-          alt={'image select'}
-        />
-        <Text>{item.title}</Text>
+      <Button
+        variant="outline"
+        colorScheme="gray"
+        key={item.title}
+        onPress={() => {
+          forceUpdate();
+        }}>
+        {item.questionAnswer ? (
+          <Image source={questionIcon} alt={'image select'} />
+        ) : (
+          <Image source={answeredIcon} alt={'image select'} />
+        )}
+        <Text>{item.questionAnswer ? 'true' : 'false'}</Text>
       </Button>
     );
   }
@@ -67,9 +74,17 @@ function Content({items}: IProps) {
         <Button
           bgColor="gray"
           onPress={() => {
+            setAnswerCheck(0);
+          }}>
+          <Image source={allIcon} alt={'show all item'} />
+          <Text>전체보기</Text>
+        </Button>
+        <Button
+          bgColor="gray"
+          onPress={() => {
             setAnswerCheck(1);
           }}>
-          <Image source={iconTest1} alt={'image1'} />
+          <Image source={questionIcon} alt={'show unanswered item'} />
           <Text>미완료</Text>
         </Button>
         <Button
@@ -77,7 +92,7 @@ function Content({items}: IProps) {
           onPress={() => {
             setAnswerCheck(2);
           }}>
-          <Image source={iconTest2} alt={'image2'} />
+          <Image source={answeredIcon} alt={'show answered item'} />
           <Text>답변완료</Text>
         </Button>
       </View>

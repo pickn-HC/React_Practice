@@ -18,26 +18,57 @@ const Category: Array<string> = [
 ];
 
 const App = () => {
-  // function test(title: string) {
-  //   ContentItem.map(item => {
-  //     if (item.title === title) {
-  //       item.questionAnswer = !item.questionAnswer;
-  //     }
-  //   });
-  //   setContentItems(ContentItem);
+  const [whichCategory, setWhichCategory] = useState(0);
+  const [categoryLen, setCategoryLen] = useState(0);
+  const [firstCategory, setFirstCategory] = useState(0);
+  const [secondCategory, setSecondCategory] = useState(0);
+
+  // function checkCategory(categoryNbr: number, categoryLen: number) {
+  //   setWhichCategory(categoryNbr);
+  //   setCategoryLen(categoryLen);
   // }
+
+  // if (categoryLen === 2) {
+  //   setFirstCategory(whichCategory);
+  // } else {
+  //   setSecondCategory(whichCategory);
+  // }
+
+  const [tabIndex, setTabIndex] = useState(0);
+  const [cIndex, setCIndex] = useState(0);
+  const [data, setData] = useState(ContentItem);
+
+  function onChangeTabIndex(index: number, type: boolean) {
+    if (type) {
+        ContentItem.filter(item => {
+          return item.tab === index;
+        }),
+    } else {
+      
+    }
+  }
 
   return (
     <NativeBaseProvider>
       <SafeAreaView style={{height: '100%', position: 'relative'}}>
         <View style={styles.tap1}>
-          <CategoryList title={WhosQuestion} size={20} />
+          <CategoryList
+            title={WhosQuestion}
+            size={20}
+            type={true}
+            onChangeIndex={onChangeTabIndex}
+          />
         </View>
         <View style={styles.tap2}>
-          <CategoryList title={Category} size={15} />
+          <CategoryList
+            title={Category}
+            size={15}
+            type={false}
+            onChangeIndex={onChangeTabIndex}
+          />
         </View>
         <ScrollView style={[{marginBottom: 55}, styles.content]}>
-          <Content items={ContentItem} />
+          <Content items={ContentItem} tab={tabIndex} cTab={cIndex} />
         </ScrollView>
         <View style={styles.button}>
           <EnrollmentButton />

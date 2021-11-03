@@ -1,7 +1,12 @@
 import React, {useState} from 'react';
 import {TouchableOpacity, Text, View, StyleSheet} from 'react-native';
 
-function Texting(Props: {title: string[]; size: number}) {
+function Texting(Props: {
+  title: string[];
+  size: number;
+  onChangeIndex: Function;
+  type: boolean;
+}) {
   const [selected, setSelected] = useState(0);
 
   const content = [];
@@ -17,6 +22,7 @@ function Texting(Props: {title: string[]; size: number}) {
         <TouchableOpacity
           onPress={() => {
             setSelected(i);
+            Props.onChangeIndex(i, Props.type);
           }}
           style={styles.button}>
           <Text
@@ -35,7 +41,12 @@ function Texting(Props: {title: string[]; size: number}) {
   return content;
 }
 
-function CategoryList(Props: {title: string[]; size: number}) {
+function CategoryList(Props: {
+  title: string[];
+  size: number;
+  type: boolean;
+  onChangeIndex: Function;
+}) {
   const content = Texting(Props);
 
   return <View style={styles.button}>{content}</View>;

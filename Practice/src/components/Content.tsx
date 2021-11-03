@@ -8,6 +8,9 @@ const answeredIcon = require('../Assets/Images/question_fill.png');
 
 interface IProps {
   items: IContentItemEle[];
+  // categoryNbr: number[];
+  tab: number;
+  cTab: number;
 }
 
 interface IContentItemEle {
@@ -18,7 +21,12 @@ interface IContentItemEle {
   categoryNumber: number; // 질문 카테고리 번호
 }
 
-function ChooseContent(items: IContentItemEle[], answerCheck: number) {
+function ChooseContent(
+  items: IContentItemEle[],
+  tab: number,
+  cTab: number,
+  answerCheck: number,
+) {
   let chooseItem: Array<any> = [];
 
   if (answerCheck === 0) {
@@ -32,32 +40,18 @@ function ChooseContent(items: IContentItemEle[], answerCheck: number) {
       }
     }
   }
+
   return chooseItem;
 }
 
-function useForceUpdate() {
-  const [value, setValue] = useState(0); // integer state
-  return () =>
-    setValue((): number => {
-      return value + 1;
-    }); // update the state to force render
-}
-
-function Content({items}: IProps) {
-  const forceUpdate = useForceUpdate();
+function Content({items, tab, cTab}: IProps) {
   const [answerCheck, setAnswerCheck] = useState(0);
   let chooseItem: Array<any> = [];
-  chooseItem = ChooseContent(items, answerCheck);
+  chooseItem = ChooseContent(items, answerCheck, tab, cTab);
 
   function Test(item: IContentItemEle) {
     return (
-      <Button
-        variant="outline"
-        colorScheme="gray"
-        key={item.title}
-        onPress={() => {
-          forceUpdate();
-        }}>
+      <Button variant="outline" colorScheme="gray" key={item.title}>
         {item.questionAnswer ? (
           <Image source={questionIcon} alt={'image select'} />
         ) : (

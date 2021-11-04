@@ -1,4 +1,4 @@
-# React와 JavaScript를 활용한 CRUD 학습
+# React와 JavaScript 학습
 '생활코딩! 리액트 프로그래밍' 책을 참고하여 학습 진행
 샘플 웹앱을 생성하는 방법부터 CRUD 내용까지 상세하게 서술 (Visual Studio Code를 활용)
 

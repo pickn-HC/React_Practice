@@ -19,7 +19,7 @@
 ### 1-1. 실행된 화면에 대한 간단한 설명
 `ㄱ. index.html을 통해 만들어진 화면`\
    : 실행된 화면은 public 폴더의 index.html이 실행되며 만들어진 화면입니다.
-
+     \
      31번째 줄에 보이는 <div id="root"></div>를 주의깊게 봐야합니다.\
      src 폴더의 앱의 진입점인 index.js 파일을 보면 'document.getElementById('root')'를 통해 root에\
      4번째 줄에서 받아온 App.js를 9번째 줄에 적힌 <App />을 통해 렌더링하게 됩니다.

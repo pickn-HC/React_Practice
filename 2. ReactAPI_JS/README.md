@@ -1,70 +1,30 @@
-# Getting Started with Create React App
+# React와 Axios를 활용한 API 통신 학습
+외부에서 데이터를 받아와 화면에 띄울수도 있습니다.\
+JSONPlaceholder라는 가상데이터를 활용하여 학습을 진행하겠습니다.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 1. Axios를 활용해서 API 받아오기
+ㄱ. 'npm install axios' 명령어를 사용하여 axios 설치\
+ㄴ. get-then 함수를 이용하여 API를 받아오고 활용\
+&nbsp&nbsp&nbsp&nbsp axios.get("{URL}").then(( {Prop_name} ) => { {Event} })\
+&nbsp&nbsp&nbsp&nbsp => Prop_name에 대부분 API를 통해 받아온 정보(response)들을 기입하고 response를 기반으로 Event를 진행
 
-## Available Scripts
+## 2. useEffect
+해당 컴포넌트 내에서 렌더링이 발생하는 상황에서 매번 동작하는 함수\
 
-In the project directory, you can run:
+```react
+useEffect(() => {
+    { Event }
+}, { Change })
+```
 
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### 2.1 의존성 추가
+useState와 Setter를 통해서 값이 업데이트되어 렌더링이 발생하면 useEffect 내부의 Event가 발생하게 됩니다.\
+Change라고 적힌 부분을 어떻게 작성하냐에 따라 원하는 내용이 업데이트 될 때에만 useEffect가 동작하게 할 수 있습니다.\
+이렇게하는 방식을 '의존성 추가'라고 합니다.\
+\
+ㄱ. 비워두기\
+&nbsp&nbsp&nbsp&nbsp 비워두면 모든 값의 업데이트에 따라 useEffect가 동작한다.
+ㄴ. 빈배열 작성[]\
+&nbsp&nbsp&nbsp&nbsp 빈배열을 작성하면 어떤 업데이트가 일어나더라도 useEffect는 영향을 받지 않는다.
+ㄷ. [variable_names]\
+&nbsp&nbsp&nbsp&nbsp 배열 내부에 적어둔 내용에 업데이트가 일어나 렌더링이 발생하면 useEffect도 동작한다.

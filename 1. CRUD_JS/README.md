@@ -41,7 +41,7 @@ TOC와 ReadContent의 값을 저장한 변수에 Setter를 사용하여 업데�
 TOC와 ReadContent의 값을 저장한 변수에 Setter를 사용하여 삭제됬다는 것을 알려준다.
 
 ### Strict Mode
-JavaScript에는 Strict Mode라고 하여 렌더링을 두번 진행하며 에러를 찾는 방식이 존재합니다.
-Delete의 경우, 내용을 삭제한 후 창을 띄워 확인을 받기 때문에 Create/Read/Update 과정에서는 알지 못했던
-두번 렌더링 되는 과정을 알 수 있게 되었습니다.
+JavaScript에는 Strict Mode라고 하여 렌더링을 두번 진행하며 에러를 찾는 방식이 존재합니다.\
+Delete의 경우, 내용을 삭제한 후 창을 띄워 확인을 받기 때문에 Create/Read/Update 과정에서는 알지 못했던\
+두번 렌더링 되는 과정을 알 수 있게 되었습니다.\
 index.js 파일에서 App 컴포넌트를 감싸고 있는 Strict Mode를 삭제해주면 문제를 해결할 수 있습니다.

@@ -3,25 +3,25 @@
 샘플 웹앱을 생성하는 방법부터 CRUD 내용까지 상세하게 서술 (Visual Studio Code를 활용)
 
 ## 1. 샘플 앱 생성
-`ㄱ. npm install -g create-react-app`
+`ㄱ. npm install -g create-react-app`./
    : 학습을 진행할 폴더를 선택한 후, 해당 폴더 및 하위 모든 폴더(-g 속성)에 'create-react-app'을 설치
      
-`ㄴ. npx create-react-app {app_name}`
-   : 선택한 폴더에 원하는 이름으로 (app_name 위치) 샘플 웹앱을 생성
+`ㄴ. npx create-react-app {app_name}`./
+   : 선택한 폴더에 원하는 이름으로 (app_name 위치) 샘플 웹앱을 생성./
      단, 폴더명은 대문자가 들어가서는 안된다. 필요하다면 나중에 수정
 
-`ㄷ. npm run start`
-   : VS 상에서 'ctrl + `'를 통해 터미널 창을 열고 해당 명령어를 입력하면 아래 그림과 같은
-    샘플 웹앱을 실행시킬 수 있다.
+`ㄷ. npm run start`./
+   : VS 상에서 'ctrl + `'를 통해 터미널 창을 열고 해당 명령어를 입력하면./
+    아래 그림과 같은 샘플 웹앱을 실행시킬 수 있습니다../
     * 1 이미지 삽입 *
 
 
 ### 1-1. 실행된 화면에 대한 간단한 설명
-`ㄱ. index.html을 통해 만들어진 화면`
-   : 실행된 화면은 public 폴더의 index.html이 실행되며 만들어진 화면입니다.
+`ㄱ. index.html을 통해 만들어진 화면`./
+   : 실행된 화면은 public 폴더의 index.html이 실행되며 만들어진 화면입니다../
 
-     31번째 줄에 보이는 <div id="root"></div>를 주의깊게 봐야합니다.
-     src 폴더의 앱의 진입점인 index.js 파일을 보면 'document.getElementById('root')'를 통해 root에 
+     31번째 줄에 보이는 <div id="root"></div>를 주의깊게 봐야합니다../
+     src 폴더의 앱의 진입점인 index.js 파일을 보면 'document.getElementById('root')'를 통해 root에./
      4번째 줄에서 받아온 App.js를 9번째 줄에 적힌 <App />을 통해 렌더링하게 됩니다.
 
      실행된 화면에서 'F12' 키를 통해 개발자 도구 화면을 띄워서 화면 임의의 위치에 우클릭 한 후

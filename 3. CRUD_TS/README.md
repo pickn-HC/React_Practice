@@ -5,9 +5,9 @@
 
 
 ## 각 변수에 Data Type 설정
-- 한 변수에 data type 설정
+- 한 변수에 data type 설정\
    ```const {variable_name}: {data_type} = {initial_value}```
-- 배열에 data type 설정
+- 배열에 data type 설정\
    ```const {array_name}: Array<{data_type} = {initial_value}```
 - 객체에 data type 설정
    ```
